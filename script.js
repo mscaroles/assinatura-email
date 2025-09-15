@@ -11,24 +11,31 @@ function gerarAssinatura() {
   }
 
   const assinatura = `
-    <table style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333;">
+    <table cellpadding="0" cellspacing="0" style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333;">
       <tr>
-        <td style="padding-right:15px; border-right:1px dotted #999;">
-          <img src="https://pvt-site-assinatura.s3.amazonaws.com/logo-pvt.png" width="100" alt="Logo PVT"/>
+        <!-- Logo PVT -->
+        <td style="vertical-align:top; padding-right:20px;">
+          <img src="https://pvt-site-assinatura.s3.amazonaws.com/logo-pvt.png" width="100" alt="Logo PVT" />
         </td>
-        <td style="padding-left:15px;">
-          <strong style="font-size:16px; color:#00b5ff;">${nome}</strong><br/>
-          <span style="font-size:14px;">${funcao}</span><br/><br/>
 
-          <a href="mailto:${email}" style="color:#00b5ff; text-decoration:none;">${email}</a><br/>
-          <a href="tel:${celular}" style="color:#00b5ff; text-decoration:none;">${celular}</a><br/>
-          ${fixo ? `<a href="tel:${fixo}" style="color:#00b5ff; text-decoration:none;">${fixo}</a><br/>` : ''}<br/>
+        <!-- Informações pessoais -->
+        <td style="vertical-align:top; padding-right:20px;">
+          <strong style="color:#00b5ff; font-size:16px;">${nome}</strong><br />
+          <span style="color:#00b5ff; font-size:14px;">${funcao}</span><br /><br />
+          <a href="mailto:${email}" style="color:#000; text-decoration:underline;">${email}</a><br />
+          Cel: ${celular}<br />
+          ${fixo ? `Tel: ${fixo}<br />` : ''}
+        </td>
 
-          <img src="https://pvt-site-assinatura.s3.amazonaws.com/selo-totvs.png" width="150" alt="Canal Homologado TOTVS"/><br/><br/>
+        <!-- Divisor -->
+        <td style="width:1px; background-color:#ccc;"></td>
 
-          <a href="https://pvtsoftware.com.br" target="_blank" style="color:#00b5ff;">🌐 Site</a> |
-          <a href="https://www.instagram.com/pvtsoftware/" target="_blank" style="color:#00b5ff;">📸 Instagram</a> |
-          <a href="https://www.linkedin.com/company/pvtsoftware/" target="_blank" style="color:#00b5ff;">💼 LinkedIn</a>
+        <!-- Selo e links -->
+        <td style="vertical-align:top; padding-left:20px;">
+          <img src="https://pvt-site-assinatura.s3.amazonaws.com/selo-totvs.png" width="140" alt="Canal Homologado TOTVS" style="margin-bottom:10px;" /><br />
+          Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
+          Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
+          LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" style="color:#000; text-decoration:underline;">/pvtsoftware</a>
         </td>
       </tr>
     </table>
@@ -36,38 +43,3 @@ function gerarAssinatura() {
 
   document.getElementById('preview').innerHTML = assinatura;
 }
-
-function copiarAssinatura() {
-  gerarAssinatura();
-  const temp = document.createElement('textarea');
-  temp.value = document.getElementById('preview').innerHTML;
-  document.body.appendChild(temp);
-  temp.select();
-  document.execCommand('copy');
-  document.body.removeChild(temp);
-  alert('Assinatura copiada para a área de transferência.');
-}
-
-function baixarHTML() {
-  gerarAssinatura();
-  const blob = new Blob([document.getElementById('preview').innerHTML], { type: 'text/html' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'assinatura.html';
-  link.click();
-}
-
-function baixarPNG() {
-  gerarAssinatura();
-  const preview = document.getElementById('preview');
-  html2canvas(preview).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'assinatura.png';
-    link.href = canvas.toDataURL();
-    link.click();
-  });
-}
-
-document.querySelectorAll('input, select').forEach(field => {
-  field.addEventListener('input', gerarAssinatura);
-});
