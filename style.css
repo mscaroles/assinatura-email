@@ -6,6 +6,13 @@ body {
   color: #333;
 }
 
+.titulo {
+  color: #00b5ff;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -13,13 +20,6 @@ body {
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.titulo-centralizado {
-  color: #00b5ff;
-  font-size: 28px;
-  margin-bottom: 20px;
-  text-align: center;
 }
 
 h2 {
@@ -49,7 +49,8 @@ label {
   color: #333;
 }
 
-input, select {
+input,
+select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -57,11 +58,7 @@ input, select {
   border: 1px solid #ccc;
   font-size: 15px;
   font-family: 'Nunito Sans', sans-serif;
-  box-shadow: none;
-}
-
-input:required:invalid, select:required:invalid {
-  border-color: #ccc;
+  outline-color: #00b5ff;
 }
 
 .required {
@@ -86,7 +83,7 @@ ol {
   background-color: #fff;
   color: #f44336;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
 }
 
 .botoes {
@@ -112,13 +109,13 @@ button:hover {
   background-color: #009ad9;
 }
 
-.botao-copiar {
+.btn-branco {
   background-color: white;
   color: #00b5ff;
   border: 2px solid #00b5ff;
 }
 
-.botao-copiar:hover {
+.btn-branco:hover {
   background-color: #e6f7ff;
 }
 
