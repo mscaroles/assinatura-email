@@ -13,12 +13,9 @@ function gerarAssinatura() {
   const assinatura = `
     <table cellpadding="0" cellspacing="0" style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333; text-align:left;">
       <tr>
-        <!-- Logo PVT -->
         <td style="vertical-align:top; padding-right:20px;">
-          <img src="https://pvt-site-assinatura.s3.amazonaws.com/logo-pvt.png" width="100" alt="Logo PVT" />
+          <img src="logopvt.jpeg" width="100" alt="Logo PVT" />
         </td>
-
-        <!-- Informações pessoais -->
         <td style="vertical-align:top; padding-right:20px;">
           <strong style="color:#00b5ff; font-size:16px;">${nome}</strong><br />
           <span style="color:#00b5ff; font-size:14px;">${funcao}</span><br /><br />
@@ -26,13 +23,9 @@ function gerarAssinatura() {
           Cel: ${celular}<br />
           ${fixo ? `Tel: ${fixo}<br />` : ''}
         </td>
-
-        <!-- Divisor -->
         <td style="width:1px; background-color:#ccc;"></td>
-
-        <!-- Selo e links -->
         <td style="vertical-align:top; padding-left:20px;">
-          <img src="https://pvt-site-assinatura.s3.amazonaws.com/selo-totvs.png" width="140" alt="Canal Homologado TOTVS" style="margin-bottom:10px;" /><br />
+          <img src="selopvt.png" width="140" alt="Canal Homologado TOTVS" style="margin-bottom:10px;" /><br />
           Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
           Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
           LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" style="color:#000; text-decoration:underline;">/pvtsoftware</a>
