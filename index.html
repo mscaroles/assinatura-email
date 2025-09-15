@@ -1,61 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Configurar Assinatura PVT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Assinatura PVT</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h2>⚙️ Configurar Assinatura</h2>
-    <form id="formulario">
-      <label for="nome">Nome: <span class="required">*</span></label>
-      <input type="text" id="nome" required>
+    <h1>🔧 Configurar Assinatura</h1>
 
-      <label for="funcao">Função: <span class="required">*</span></label>
+    <form id="assinatura-form">
+      <label for="nome">Nome: <span>*</span></label>
+      <input type="text" id="nome" placeholder="Nome Colaborador" required />
+
+      <label for="funcao">Função: <span>*</span></label>
       <select id="funcao" required>
         <option value="">Selecione uma função</option>
+        <option value="Administrativo">Administrativo</option>
+        <option value="CEO">CEO</option>
+        <option value="Head de Serviços">Head de Serviços</option>
+        <option value="Head de Operações Administrativas">Head de Operações Administrativas</option>
+        <option value="Gestor de Portfólio de Projetos">Gestor de Portfólio de Projetos</option>
+        <option value="Coordenador de Projetos">Coordenador de Projetos</option>
+        <option value="PMO">PMO</option>
+        <option value="Consultor de Implantação">Consultor de Implantação</option>
         <option value="Desenvolvedor">Desenvolvedor</option>
-        <option value="Analista">Analista</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Comercial">Comercial</option>
-        <option value="Financeiro">Financeiro</option>
+        <option value="Consultor de Relacionamento com Cliente (CX)">Consultor de Relacionamento com Cliente (CX)</option>
+        <option value="Executivo de Contas">Executivo de Contas</option>
+        <option value="Gestor Administrativo">Gestor Administrativo</option>
+        <option value="Recursos e Alocações">Recursos e Alocações</option>
+        <option value="Analista de Faturamento">Analista de Faturamento</option>
+        <option value="Gente & Gestão">Gente & Gestão</option>
       </select>
 
-      <label for="email">Email: <span class="required">*</span></label>
-      <input type="email" id="email" required>
+      <label for="email">Email: <span>*</span></label>
+      <input type="email" id="email" placeholder="colaborador@pvtsoftware.com.br" required />
 
-      <label for="celular">Celular: <span class="required">*</span></label>
-      <input type="text" id="celular" required>
+      <label for="celular">Celular: <span>*</span></label>
+      <input type="text" id="celular" placeholder="(27) 99999-9999" required />
 
       <label for="fixo">Tel. Fixo:</label>
-      <input type="text" id="fixo">
+      <input type="text" id="fixo" placeholder="(27) 3333-3333" />
 
-      <div class="button-container">
-        <button type="submit">Gerar Assinatura</button>
-        <button type="button" id="download-html">Download HTML</button>
-        <button type="button" id="baixar-imagem">Baixar Imagem</button>
-      </div>
+      <button type="submit">Gerar Assinatura</button>
     </form>
+
+    <div class="instrucoes">
+      <h2>⚠️ INSTRUÇÕES</h2>
+      <ol>
+        <li>Preencha o formulário acima com seus dados.</li>
+        <li>Clique em <strong>Gerar Assinatura</strong>.</li>
+        <li>Copie a imagem gerada na visualização abaixo.</li>
+        <li>Cole no campo de assinatura do seu e-mail (Gmail, Outlook, etc.).</li>
+        <li>Se quiser baixar, use os botões abaixo da pré-visualização.</li>
+      </ol>
+    </div>
+
+    <div id="preview-container">
+      <h2>👀 Preview</h2>
+      <div id="assinatura-preview"></div>
+      <div class="botoes">
+        <button id="baixar-btn">📥 Baixar Assinatura (PNG)</button>
+        <button id="html-btn">💾 Download HTML</button>
+      </div>
+    </div>
   </div>
 
-  <div class="instrucoes">
-    <h3>⚠️ Instruções</h3>
-    <ol>
-      <li>Preencha seus dados acima.</li>
-      <li>Clique em <strong>Gerar Assinatura</strong>.</li>
-      <li>Clique em <strong>Baixar Imagem</strong> para salvar como PNG.</li>
-      <li>No Gmail: Configurações > Ver todas > Assinatura</li>
-      <li>Cole a imagem da assinatura ali. Pronto!</li>
-    </ol>
-  </div>
-
-  <div id="assinatura-preview"></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
