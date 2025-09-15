@@ -15,7 +15,12 @@ function gerarAssinatura() {
       <tr>
         <!-- Bloco esquerdo: LOGO -->
         <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
-          <img src="logopvt.jpeg" alt="Logo PVT" style="height:80px; width:auto; -ms-interpolation-mode:bicubic;" />
+          <img
+            src="logopvt.jpeg"
+            alt="Logo PVT"
+            height="80"
+            style="height:80px; width:auto; display:block; -ms-interpolation-mode:bicubic; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+          />
         </td>
 
         <!-- Bloco central: NOME / FUNÇÃO / CONTATOS -->
@@ -29,7 +34,12 @@ function gerarAssinatura() {
 
         <!-- Bloco direito: SELO + LINKS (com separador vertical) -->
         <td style="display:table-cell; vertical-align:middle; border-left:1px solid #ccc; padding-left:20px;">
-          <img src="selopvt.png" width="140" alt="Canal Homologado TOTVS" style="margin-bottom:10px;" /><br />
+          <img
+            src="selopvt.png"
+            alt="Canal Homologado TOTVS"
+            width="140"
+            style="width:140px; height:auto; margin-bottom:10px; display:block; -ms-interpolation-mode:bicubic; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+          /><br />
           Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
           Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
           LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" style="color:#000; text-decoration:underline;">/pvtsoftware</a>
@@ -45,7 +55,7 @@ function copiarAssinatura() {
   gerarAssinatura();
   const preview = document.getElementById('preview');
 
-  // Copia exatamente o resultado da assinatura com estilos inline
+  // Copia o resultado HTML exato da prévia (mantém estilos inline)
   navigator.clipboard.write([
     new ClipboardItem({
       'text/html': new Blob([preview.innerHTML], { type: 'text/html' }),
@@ -71,10 +81,16 @@ function baixarHTML() {
 function baixarPNG() {
   gerarAssinatura();
   const preview = document.getElementById('preview');
-  html2canvas(preview).then(canvas => {
+
+  // Render em alta definição (melhor nitidez do PNG)
+  const escala = Math.max(3, window.devicePixelRatio || 1);
+  html2canvas(preview, {
+    scale: escala,
+    useCORS: true
+  }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'assinatura.png';
-    link.href = canvas.toDataURL();
+    link.href = canvas.toDataURL('image/png', 1.0);
     link.click();
   });
 }
