@@ -54,11 +54,13 @@ select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
+  margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 15px;
   font-family: 'Nunito Sans', sans-serif;
   outline-color: #00b5ff;
+  box-sizing: border-box;
 }
 
 .required {
