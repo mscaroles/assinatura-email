@@ -1,4 +1,40 @@
-function gerarAssinatura() {
+let logoNatH = null;
+let seloNatW = null;
+
+const LOGO_TARGET_H = 80;
+const SELO_TARGET_W = 140;
+
+function medirImagens() {
+  return new Promise((resolve) => {
+    let pendentes = 2;
+
+    const logo = new Image();
+    logo.onload = () => {
+      logoNatH = logo.naturalHeight || null;
+      if (--pendentes === 0) resolve();
+    };
+    logo.onerror = () => {
+      if (--pendentes === 0) resolve();
+    };
+    logo.src = 'logopvt.jpeg';
+
+    const selo = new Image();
+    selo.onload = () => {
+      seloNatW = selo.naturalWidth || null;
+      if (--pendentes === 0) resolve();
+    };
+    selo.onerror = () => {
+      if (--pendentes === 0) resolve();
+    };
+    selo.src = 'selopvt.png';
+  });
+}
+
+const medirPromessa = medirImagens();
+
+async function gerarAssinatura() {
+  await medirPromessa;
+
   const nome = document.getElementById('nome').value;
   const funcao = document.getElementById('funcao').value;
   const email = document.getElementById('email').value;
@@ -10,20 +46,21 @@ function gerarAssinatura() {
     return;
   }
 
+  const logoRenderH = Math.min(LOGO_TARGET_H, logoNatH || LOGO_TARGET_H);
+  const seloRenderW = Math.min(SELO_TARGET_W, seloNatW || SELO_TARGET_W);
+
   const assinatura = `
-    <table cellpadding="0" cellspacing="0" style="display:table; font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333; text-align:left;">
+    <table cellpadding="0" cellspacing="0" style="display:table; font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333; text-align:left; line-height:1.35;">
       <tr>
-        <!-- Bloco esquerdo: LOGO -->
         <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
           <img
             src="logopvt.jpeg"
             alt="Logo PVT"
-            height="80"
-            style="height:80px; width:auto; display:block; -ms-interpolation-mode:bicubic; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+            height="${logoRenderH}"
+            style="height:${logoRenderH}px; width:auto; display:block; -ms-interpolation-mode:bicubic; image-rendering:-webkit-optimize-contrast;"
           />
         </td>
 
-        <!-- Bloco central: NOME / FUNÇÃO / CONTATOS -->
         <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
           <strong style="color:#00b5ff; font-size:16px;">${nome}</strong><br />
           <span style="color:#00b5ff; font-size:14px;">${funcao}</span><br /><br />
@@ -32,13 +69,12 @@ function gerarAssinatura() {
           ${fixo ? `Tel: ${fixo}<br />` : ''}
         </td>
 
-        <!-- Bloco direito: SELO + LINKS (com separador vertical) -->
         <td style="display:table-cell; vertical-align:middle; border-left:1px solid #ccc; padding-left:20px;">
           <img
             src="selopvt.png"
             alt="Canal Homologado TOTVS"
-            width="140"
-            style="width:140px; height:auto; margin-bottom:10px; display:block; -ms-interpolation-mode:bicubic; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+            width="${seloRenderW}"
+            style="width:${seloRenderW}px; height:auto; margin-bottom:10px; display:block; -ms-interpolation-mode:bicubic; image-rendering:-webkit-optimize-contrast;"
           /><br />
           Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
           Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
@@ -51,11 +87,10 @@ function gerarAssinatura() {
   document.getElementById('preview').innerHTML = assinatura;
 }
 
-function copiarAssinatura() {
-  gerarAssinatura();
+async function copiarAssinatura() {
+  await gerarAssinatura();
   const preview = document.getElementById('preview');
 
-  // Copia o resultado HTML exato da prévia (mantém estilos inline)
   navigator.clipboard.write([
     new ClipboardItem({
       'text/html': new Blob([preview.innerHTML], { type: 'text/html' }),
@@ -63,14 +98,13 @@ function copiarAssinatura() {
     })
   ]).then(() => {
     alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
-  }).catch(err => {
-    console.error('Erro ao copiar', err);
+  }).catch(() => {
     alert('Não foi possível copiar automaticamente. Copie manualmente.');
   });
 }
 
-function baixarHTML() {
-  gerarAssinatura();
+async function baixarHTML() {
+  await gerarAssinatura();
   const blob = new Blob([document.getElementById('preview').innerHTML], { type: 'text/html' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -78,11 +112,9 @@ function baixarHTML() {
   link.click();
 }
 
-function baixarPNG() {
-  gerarAssinatura();
+async function baixarPNG() {
+  await gerarAssinatura();
   const preview = document.getElementById('preview');
-
-  // Render em alta definição (melhor nitidez do PNG)
   const escala = Math.max(3, window.devicePixelRatio || 1);
   html2canvas(preview, {
     scale: escala,
@@ -95,8 +127,9 @@ function baixarPNG() {
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+  await gerarAssinatura();
   document.querySelectorAll('input, select').forEach(field => {
-    field.addEventListener('input', gerarAssinatura);
+    field.addEventListener('input', () => { gerarAssinatura(); });
   });
 });
