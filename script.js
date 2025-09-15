@@ -13,9 +13,7 @@ function medirImagens() {
       logoNatH = logo.naturalHeight || null;
       if (--pendentes === 0) resolve();
     };
-    logo.onerror = () => {
-      if (--pendentes === 0) resolve();
-    };
+    logo.onerror = () => { if (--pendentes === 0) resolve(); };
     logo.src = 'logopvt.jpeg';
 
     const selo = new Image();
@@ -23,9 +21,7 @@ function medirImagens() {
       seloNatW = selo.naturalWidth || null;
       if (--pendentes === 0) resolve();
     };
-    selo.onerror = () => {
-      if (--pendentes === 0) resolve();
-    };
+    selo.onerror = () => { if (--pendentes === 0) resolve(); };
     selo.src = 'selopvt.png';
   });
 }
@@ -57,7 +53,7 @@ async function gerarAssinatura() {
             src="logopvt.jpeg"
             alt="Logo PVT"
             height="${logoRenderH}"
-            style="height:${logoRenderH}px; width:auto; display:block; -ms-interpolation-mode:bicubic; image-rendering:-webkit-optimize-contrast;"
+            style="height:${logoRenderH}px; width:auto; display:block; image-rendering:auto;"
           />
         </td>
 
@@ -74,7 +70,7 @@ async function gerarAssinatura() {
             src="selopvt.png"
             alt="Canal Homologado TOTVS"
             width="${seloRenderW}"
-            style="width:${seloRenderW}px; height:auto; margin-bottom:10px; display:block; -ms-interpolation-mode:bicubic; image-rendering:-webkit-optimize-contrast;"
+            style="width:${seloRenderW}px; height:auto; margin-bottom:10px; display:block; image-rendering:auto;"
           /><br />
           Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
           Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
@@ -91,16 +87,16 @@ async function copiarAssinatura() {
   await gerarAssinatura();
   const preview = document.getElementById('preview');
 
-  navigator.clipboard.write([
+  await navigator.clipboard.write([
     new ClipboardItem({
       'text/html': new Blob([preview.innerHTML], { type: 'text/html' }),
       'text/plain': new Blob([preview.innerText], { type: 'text/plain' })
     })
-  ]).then(() => {
-    alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
-  }).catch(() => {
+  ]).catch(() => {
     alert('Não foi possível copiar automaticamente. Copie manualmente.');
   });
+
+  alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
 }
 
 async function baixarHTML() {
@@ -116,10 +112,7 @@ async function baixarPNG() {
   await gerarAssinatura();
   const preview = document.getElementById('preview');
   const escala = Math.max(3, window.devicePixelRatio || 1);
-  html2canvas(preview, {
-    scale: escala,
-    useCORS: true
-  }).then(canvas => {
+  html2canvas(preview, { scale: escala, useCORS: true }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'assinatura.png';
     link.href = canvas.toDataURL('image/png', 1.0);
