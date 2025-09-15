@@ -3,31 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerador de Assinaturas - PVT</title>
+  <title>Atualize sua assinatura #PVT</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
-    <h1>Gerador de Assinaturas PVT</h1>
+    <h1 class="title">Atualize sua assinatura <span class="azul">#PVT</span></h1>
 
-    <div class="instructions">
-      <p>1. Preencha o formulário acima<br>
-      2. Clique em "Copie sua assinatura"<br>
-      3. Abra o Outlook > vá em Configurações > Assinatura > e cole a sua assinatura<br><br>
-      - Se preferir, baixe a versão PNG, ou HTML, e faça o upload de forma manual.<br><br>
-      ✅ Assinatura compatível com Outlook (Desktop, Web e Mobile) e Gmail.<br>
-      <em>Em caso de dúvidas, entre em contato com o nosso time de Gestão!</em></p>
-    </div>
-
-    <form id="signatureForm">
+    <div class="formulario">
       <div class="input-wrap">
-        <label for="nome">Nome: *</label>
-        <input type="text" id="nome" required />
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome completo" />
       </div>
       <div class="input-wrap">
-        <label for="funcao">Função: *</label>
-        <select id="funcao" required>
+        <label for="funcao">Função:</label>
+        <select id="funcao">
           <option value="">Selecione uma função</option>
           <option>Administrativo</option>
           <option>CEO</option>
@@ -47,35 +38,42 @@
         </select>
       </div>
       <div class="input-wrap">
-        <label for="email">Email: *</label>
-        <input type="email" id="email" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="seuemail@dominio.com" />
       </div>
       <div class="input-wrap">
-        <label for="celular">Celular: *</label>
-        <input type="text" id="celular" required />
+        <label for="celular">Celular:</label>
+        <input type="text" id="celular" placeholder="(11) 90000-0000" />
       </div>
       <div class="input-wrap">
-        <label for="telefone">Telefone fixo: (opcional)</label>
-        <input type="text" id="telefone" />
-      </div>
-      <button type="submit">Gerar Assinatura</button>
-    </form>
-
-    <div id="preview-container" class="hidden">
-      <h2>Preview</h2>
-      <div id="signature-preview"></div>
-
-      <div class="actions">
-        <button id="copyBtn">Copie sua assinatura</button>
-        <button id="downloadPngBtn">Baixe a Assinatura (PNG)</button>
-        <button id="downloadHtmlBtn">Download HTML</button>
+        <label for="fixo">Telefone fixo (opcional):</label>
+        <input type="text" id="fixo" placeholder="(11) 0000-0000" />
       </div>
     </div>
-  </div>
 
-  <footer>
-    <p>Feito com 🩵 — PVT</p>
-  </footer>
+    <div class="instrucoes">
+      <h2>⚠️ INSTRUÇÕES</h2>
+      <ol>
+        <li>Preencha o formulário acima</li>
+        <li>Clique em "Copie sua assinatura"</li>
+        <li>Abra o Outlook > vá em Configurações > Assinatura > e cole a sua assinatura</li>
+      </ol>
+      <p>Se preferir, baixe a versão PNG, ou HTML, e faça o upload de forma manual.</p>
+      <p class="small">✅ Assinatura compatível com Outlook (Desktop, Web e Mobile) e Gmail. <br><em>Em caso de dúvidas, entre em contato com o nosso time de Gestão!</em></p>
+    </div>
+
+    <div id="assinaturaPreview" class="assinatura-preview"></div>
+
+    <div class="botoes">
+      <button id="copiar" class="btn-outline">📄 Copie sua assinatura</button>
+      <button id="baixarPNG" class="btn-fill">📏 Baixe a versão PNG</button>
+      <button id="baixarHTML" class="btn-fill">💾 Download HTML</button>
+    </div>
+
+    <footer>
+      <p class="footer">Feito com🖥️ — PVT</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
