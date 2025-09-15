@@ -11,20 +11,24 @@ function gerarAssinatura() {
   }
 
   const assinatura = `
-    <table cellpadding="0" cellspacing="0" style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333; text-align:left;">
+    <table cellpadding="0" cellspacing="0" style="display:table; font-family:'Nunito Sans', sans-serif; font-size:14px; color:#333; text-align:left;">
       <tr>
-        <td style="vertical-align:top; padding-right:20px;">
-          <img src="logopvt.jpeg" width="100" alt="Logo PVT" />
+        <!-- Bloco esquerdo: LOGO -->
+        <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
+          <img src="logopvt.jpeg" alt="Logo PVT" style="height:100px; width:auto; -ms-interpolation-mode:bicubic;" />
         </td>
-        <td style="vertical-align:top; padding-right:20px;">
+
+        <!-- Bloco central: NOME / FUNÇÃO / CONTATOS -->
+        <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
           <strong style="color:#00b5ff; font-size:16px;">${nome}</strong><br />
           <span style="color:#00b5ff; font-size:14px;">${funcao}</span><br /><br />
           <a href="mailto:${email}" style="color:#000; text-decoration:underline;">${email}</a><br />
           Cel: ${celular}<br />
           ${fixo ? `Tel: ${fixo}<br />` : ''}
         </td>
-        <td style="width:1px; background-color:#ccc;"></td>
-        <td style="vertical-align:top; padding-left:20px;">
+
+        <!-- Bloco direito: SELO + LINKS (com separador vertical) -->
+        <td style="display:table-cell; vertical-align:middle; border-left:1px solid #ccc; padding-left:20px;">
           <img src="selopvt.png" width="140" alt="Canal Homologado TOTVS" style="margin-bottom:10px;" /><br />
           Site: <a href="https://pvtsoftware.com.br" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
           Instagram: <a href="https://instagram.com/pvtsoftware" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
@@ -39,13 +43,19 @@ function gerarAssinatura() {
 
 function copiarAssinatura() {
   gerarAssinatura();
-  const temp = document.createElement('textarea');
-  temp.value = document.getElementById('preview').innerHTML;
-  document.body.appendChild(temp);
-  temp.select();
+
+  const preview = document.getElementById('preview');
+
+  // Seleciona visualmente todo o conteúdo da assinatura
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.selectAllChildren(preview);
+
+  // Copia mantendo o rich content (compatível com Outlook)
   document.execCommand('copy');
-  document.body.removeChild(temp);
-  alert('Assinatura copiada para a área de transferência.');
+
+  // Mensagem solicitada
+  alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
 }
 
 function baixarHTML() {
