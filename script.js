@@ -1,15 +1,24 @@
-$(document).ready(function() {
+$(function () {
+  // Máscaras
   $('#celular').mask('(00) 00000-0000');
   $('#fixo').mask('(00) 0000-0000');
 
-  $('#formulario').on('submit', function(e) {
+  // Submissão do formulário: gerar prévia
+  $('#assinatura-form').on('submit', function (e) {
     e.preventDefault();
-    const nome = $('#nome').val();
-    const funcao = $('#funcao').val();
-    const email = $('#email').val();
-    const celular = $('#celular').val();
-    const fixo = $('#fixo').val();
 
+    const nome = $('#nome').val().trim();
+    const funcao = $('#funcao').val().trim();
+    const email = $('#email').val().trim();
+    const celular = $('#celular').val().trim();
+    const fixo = $('#fixo').val().trim();
+
+    if (!nome || !funcao || !email || !celular) {
+      alert('Preencha os campos obrigatórios.');
+      return;
+    }
+
+    // HTML da assinatura
     const assinaturaHTML = `
       <table style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#000000;">
         <tr>
@@ -34,22 +43,30 @@ $(document).ready(function() {
     `;
 
     $('#assinatura-preview').html(assinaturaHTML);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   });
 
-  $('#download-html').on('click', function() {
-    const assinaturaHTML = document.getElementById('assinatura-preview').innerHTML;
-    const blob = new Blob([assinaturaHTML], {type: 'text/html'});
+  // Download do HTML
+  $('#html-btn').on('click', function () {
+    const html = $('#assinatura-preview').html();
+    if (!html) { alert('Gere a assinatura primeiro.'); return; }
+
+    const blob = new Blob([html], { type: 'text/html' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = 'assinatura-pvt.html';
     a.click();
   });
 
-  $('#baixar-imagem').on('click', function() {
-    html2canvas(document.querySelector('#assinatura-preview')).then(canvas => {
+  // Download PNG do preview
+  $('#baixar-btn').on('click', function () {
+    const el = document.querySelector('#assinatura-preview');
+    if (!el || !el.innerHTML.trim()) { alert('Gere a assinatura primeiro.'); return; }
+
+    html2canvas(el, { backgroundColor: null, scale: 2 }).then(canvas => {
       const link = document.createElement('a');
       link.download = 'assinatura-pvt.png';
-      link.href = canvas.toDataURL();
+      link.href = canvas.toDataURL('image/png');
       link.click();
     });
   });
