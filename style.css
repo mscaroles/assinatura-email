@@ -1,109 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+
 body {
   font-family: 'Nunito Sans', sans-serif;
-  background-color: #f8f9fa;
-  margin: 0;
-  padding: 20px;
+  background-color: #f7f7f7;
+  padding: 30px;
   color: #000;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-}
-
-.page-title {
+h1 {
   color: #00b5ff;
-  font-size: 28px;
+  margin-bottom: 10px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
-  text-align: center;
 }
 
-.box {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+h2 {
+  font-size: 18px;
+  margin: 15px 0 8px;
+  font-weight: 600;
 }
 
-.section-title {
-  color: #00b5ff;
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 16px;
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .input-wrap {
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-}
-
-.input-wrap label {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.input-wrap input,
-.input-wrap select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
-
-.input-wrap:focus-within input,
-.input-wrap:focus-within select {
-  border-color: #00b5ff;
-  box-shadow: 0 0 0 2px rgba(0, 181, 255, 0.2);
-  outline: none;
-}
-
-.instructions p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.signature-preview {
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  padding: 20px;
   background: #fff;
-  margin-top: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
 }
 
-.buttons {
+.input-wrap:focus-within {
+  border-color: #00b5ff;
+  box-shadow: 0 0 6px rgba(0,181,255,0.4);
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+select {
+  appearance: none;
+  background: url('data:image/svg+xml;utf8,<svg fill="%2300b5ff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+  background-color: white;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-white-blue {
+  background-color: #fff;
+  border: 2px solid #00b5ff;
+  color: #00b5ff;
+}
+
+.btn-blue {
+  background-color: #00b5ff;
+  color: #fff;
+}
+
+.preview-box {
+  background-color: #fff;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
+  justify-content: center;
 }
 
-.buttons button {
-  flex: 1;
-  min-width: 180px;
-  padding: 12px;
-  font-family: 'Nunito Sans', sans-serif;
+.signature-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  justify-content: center;
+}
+
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signature-info {
+  text-align: left;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #00b5ff;
+}
+
+.role {
+  color: #00b5ff;
   font-size: 14px;
-  font-weight: 600;
-  background-color: #003b5c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
+  margin-bottom: 8px;
 }
 
-.buttons button:hover {
-  background-color: #005d89;
-}
-
-.footer {
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #777;
+  font-style: italic;
   text-align: center;
-  font-size: 12px;
-  color: #999999;
-  margin-top: 32px;
 }
