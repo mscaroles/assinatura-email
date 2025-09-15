@@ -15,7 +15,7 @@ function gerarAssinatura() {
       <tr>
         <!-- Bloco esquerdo: LOGO -->
         <td style="display:table-cell; vertical-align:middle; padding-right:20px;">
-          <img src="logopvt.jpeg" alt="Logo PVT" style="height:100px; width:auto; -ms-interpolation-mode:bicubic;" />
+          <img src="logopvt.jpeg" alt="Logo PVT" style="height:80px; width:auto; -ms-interpolation-mode:bicubic;" />
         </td>
 
         <!-- Bloco central: NOME / FUNÇÃO / CONTATOS -->
@@ -43,19 +43,20 @@ function gerarAssinatura() {
 
 function copiarAssinatura() {
   gerarAssinatura();
-
   const preview = document.getElementById('preview');
 
-  // Seleciona visualmente todo o conteúdo da assinatura
-  const selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.selectAllChildren(preview);
-
-  // Copia mantendo o rich content (compatível com Outlook)
-  document.execCommand('copy');
-
-  // Mensagem solicitada
-  alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
+  // Copia exatamente o resultado da assinatura com estilos inline
+  navigator.clipboard.write([
+    new ClipboardItem({
+      'text/html': new Blob([preview.innerHTML], { type: 'text/html' }),
+      'text/plain': new Blob([preview.innerText], { type: 'text/plain' })
+    })
+  ]).then(() => {
+    alert('Assinatura copiada com sucesso! Agora vá até o Outlook ;)');
+  }).catch(err => {
+    console.error('Erro ao copiar', err);
+    alert('Não foi possível copiar automaticamente. Copie manualmente.');
+  });
 }
 
 function baixarHTML() {
