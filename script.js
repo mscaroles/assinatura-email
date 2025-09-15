@@ -3,7 +3,7 @@ $(function () {
   $('#celular').mask('(00) 00000-0000');
   $('#fixo').mask('(00) 0000-0000');
 
-  // Submissão do formulário: gerar prévia
+  // Gerar prévia
   $('#assinatura-form').on('submit', function (e) {
     e.preventDefault();
 
@@ -18,7 +18,6 @@ $(function () {
       return;
     }
 
-    // HTML da assinatura
     const assinaturaHTML = `
       <table style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#000000;">
         <tr>
@@ -58,7 +57,7 @@ $(function () {
     a.click();
   });
 
-  // Download PNG do preview
+  // Download PNG
   $('#baixar-btn').on('click', function () {
     const el = document.querySelector('#assinatura-preview');
     if (!el || !el.innerHTML.trim()) { alert('Gere a assinatura primeiro.'); return; }
