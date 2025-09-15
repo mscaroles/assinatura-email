@@ -11,7 +11,7 @@
 
 <body>
   <div class="container">
-    <h1>Atualize sua assinatura #PVT</h1>
+    <h1 class="titulo-centralizado">Atualize sua assinatura #PVT</h1>
 
     <div class="card">
       <h2><span class="emoji">🔧</span> Configurar Assinatura</h2>
@@ -63,12 +63,12 @@
     </div>
 
     <div class="card">
-      <h2><span class="emoji">👁️</span> Preview</h2>
+      <h2><span class="emoji">👀</span> Visualize a Prévia</h2>
       <div id="preview" class="preview">Preencha todos os campos obrigatórios.</div>
     </div>
 
     <div class="botoes">
-      <button onclick="copiarAssinatura()">📋 Copie sua assinatura</button>
+      <button class="botao-copiar" onclick="copiarAssinatura()">📋 Copie sua assinatura</button>
       <button onclick="baixarPNG()">🖼️ Baixe a assinatura (PNG)</button>
       <button onclick="baixarHTML()">📄 Download HTML</button>
     </div>
@@ -76,8 +76,6 @@
     <footer>Feito com 🩵 — PVT</footer>
   </div>
 
-  <!-- Corrigido: Importando html2canvas -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
 
