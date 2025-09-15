@@ -1,69 +1,63 @@
-document.getElementById("generate").addEventListener("click", generateSignature);
-document.getElementById("copy").addEventListener("click", copySignature);
-document.getElementById("download-html").addEventListener("click", downloadHTML);
-document.getElementById("download-png").addEventListener("click", downloadPNG);
+document.getElementById("signatureForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-function generateSignature() {
   const nome = document.getElementById("nome").value;
   const funcao = document.getElementById("funcao").value;
   const email = document.getElementById("email").value;
   const celular = document.getElementById("celular").value;
+  const telefone = document.getElementById("telefone").value;
 
-  const signature = `
-  <table style="font-family:'Nunito Sans', sans-serif; font-size:14px;">
-    <tr>
-      <td style="padding-right:20px; border-right:1px solid #ccc;">
-        <img src="logopvt.jpeg" alt="Logo PVT" style="width:80px;">
-      </td>
-      <td style="padding:0 20px;">
-        <p style="margin:0; font-size:16px; font-weight:bold; color:#00b5ff;">${nome}</p>
-        <p style="margin:0; color:#00b5ff;">${funcao}</p>
-        <p style="margin:6px 0;"><a href="mailto:${email}" style="color:#000;">${email}</a></p>
-        <p style="margin:0;">Cel: ${celular}</p>
-      </td>
-      <td style="padding-left:20px; border-left:1px solid #ccc;">
-        <img src="selopvt.png" alt="Selo PVT" style="width:100px;"><br><br>
-        <p style="margin:0;">Site: <a href="https://pvtsoftware.com.br">pvtsoftware.com.br</a></p>
-        <p style="margin:0;">Instagram: <a href="https://instagram.com/pvtsoftware">@pvtsoftware</a></p>
-        <p style="margin:0;">LinkedIn: <a href="https://linkedin.com/company/pvtsoftware">/pvtsoftware</a></p>
-      </td>
-    </tr>
-  </table>
+  const html = `
+    <table cellpadding="0" cellspacing="0" style="font-family:'Nunito Sans', sans-serif;">
+      <tr>
+        <td style="vertical-align:top; padding-right:20px;">
+          <img src="logopvt.jpeg" alt="PVT Logo" style="height:90px;" />
+        </td>
+        <td style="border-left:1px solid #ccc; padding-left:20px;">
+          <div style="color:#00b5ff; font-weight:bold; font-size:16px;">${nome}</div>
+          <div style="color:#00b5ff; font-size:14px; margin-bottom:8px;">${funcao}</div>
+          <div style="color:#000; font-size:13px;">
+            <a href="mailto:${email}" style="color:#000; text-decoration:underline;">${email}</a><br />
+            Cel: ${celular}${telefone ? `<br />Tel: ${telefone}` : ""}
+          </div>
+        </td>
+        <td style="padding-left:20px;">
+          <img src="selopvt.png" alt="Selo PVT" style="height:90px;" /><br />
+          <div style="font-size:12px; color:#000; margin-top:6px;">
+            Site: <a href="https://pvtsoftware.com.br" target="_blank" style="color:#000; text-decoration:underline;">pvtsoftware.com.br</a><br />
+            Instagram: <a href="https://instagram.com/pvtsoftware" target="_blank" style="color:#000; text-decoration:underline;">@pvtsoftware</a><br />
+            LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" target="_blank" style="color:#000; text-decoration:underline;">/pvtsoftware</a>
+          </div>
+        </td>
+      </tr>
+    </table>
   `;
 
-  document.getElementById("preview").innerHTML = signature;
-}
+  document.getElementById("signature-preview").innerHTML = html;
+  document.getElementById("preview-container").classList.remove("hidden");
 
-function copySignature() {
-  const el = document.createElement("textarea");
-  el.value = document.getElementById("preview").innerHTML;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  document.body.removeChild(el);
+  // Copy button
+  document.getElementById("copyBtn").onclick = () => {
+    navigator.clipboard.writeText(html);
+    alert("Assinatura copiada para a área de transferência!");
+  };
 
-  alert("Assinatura copiada com sucesso! Agora, vá até o Outlook ;)");
-}
+  // PNG button
+  document.getElementById("downloadPngBtn").onclick = () => {
+    html2canvas(document.querySelector("#signature-preview")).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "assinatura-pvt.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  };
 
-function downloadHTML() {
-  const htmlContent = document.getElementById("preview").innerHTML;
-  const blob = new Blob([htmlContent], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "assinatura_pvt.html";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function downloadPNG() {
-  const node = document.getElementById("preview");
-  html2canvas(node).then(canvas => {
+  // HTML button
+  document.getElementById("downloadHtmlBtn").onclick = () => {
+    const blob = new Blob([html], { type: "text/html" });
     const link = document.createElement("a");
-    link.download = "assinatura_pvt.png";
-    link.href = canvas.toDataURL();
+    link.href = URL.createObjectURL(blob);
+    link.download = "assinatura-pvt.html";
     link.click();
-  });
-}
+  };
+});
