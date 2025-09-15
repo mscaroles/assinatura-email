@@ -4,60 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Atualize sua assinatura #PVT</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>Atualize sua assinatura #PVT</h1>
 
     <form id="signatureForm">
-      <label>Nome completo*</label>
-      <input type="text" id="nome" required />
+      <label for="nome">Nome completo*</label>
+      <input type="text" id="nome" name="nome" required />
 
-      <label>Cargo*</label>
-      <input type="text" id="cargo" required />
+      <label for="cargo">Cargo*</label>
+      <input type="text" id="cargo" name="cargo" required />
 
-      <label>Telefone fixo</label>
-      <input type="text" id="telefone" placeholder="(xx) xxxx-xxxx"/>
+      <label for="telefone">Telefone celular*</label>
+      <input type="text" id="telefone" name="telefone" required />
 
-      <label>Celular*</label>
-      <input type="text" id="celular" required placeholder="(xx) xxxxx-xxxx"/>
-
-      <label>Email*</label>
-      <input type="email" id="email" required/>
-
-      <label>Estado (sigla)*</label>
-      <input type="text" id="estado" required/>
-
-      <label>Cidade*</label>
-      <input type="text" id="cidade" required/>
+      <label for="fixo">Telefone fixo</label>
+      <input type="text" id="fixo" name="fixo" />
 
       <button type="submit">Gerar assinatura</button>
     </form>
 
-    <div class="botoes">
-      <button onclick="copiarAssinatura()">📋 Copie sua assinatura</button>
-      <button onclick="baixarAssinatura()">⬇️ Baixar PNG</button>
-      <button onclick="baixarHTML()">💾 Download HTML</button>
-    </div>
+    <div id="assinatura" class="assinatura"></div>
 
-    <div id="preview-container">
-      <h2>Pré-visualização:</h2>
-      <div id="assinaturaPreview"></div>
+    <div class="botoes">
+      <button id="copiarAssinatura">📋 Copie sua assinatura</button>
+      <button id="baixarAssinatura">📎 Baixar imagem PNG</button>
+      <button id="baixarHTML">💾 Download HTML</button>
     </div>
 
     <div class="instrucoes">
-      <p>✅ Assinatura compatível com Outlook (Desktop, Web e Mobile) e Gmail.</p>
       <p>
-        Copie sua assinatura > vá até “Configurações” no Outlook > cole o que foi selecionado.
-        <br>
-        Ou, se preferir, baixe a versão PNG e faça o upload. 
-        <br>
-        Ou ainda, use o arquivo HTML para inserir a assinatura com ajuda da TI.
+        ✅ Assinatura compatível com Outlook (Desktop, Web e Mobile) e Gmail.
       </p>
-      <p><em>Caso surjam dúvidas, entre em contato com o time de Gestão para mais informações.</em></p>
-      <p class="footer">Feito com 🩵 — PVT</p>
+      <p>
+        Copie sua assinatura > vá até 'Configurações' no Outlook > cole o que foi selecionado.<br>
+        Ou, se preferir, baixe a versão PNG e faça o upload.<br>
+        Ou ainda, faça o download da versão HTML para inserção técnica (com ou sem apoio do time de TI).
+      </p>
+      <p class="destaque">
+        Caso surjam dúvidas, entre em contato com o time de Gestão para mais informações.
+      </p>
     </div>
+
+    <footer>
+      <p>Feito com 🩵 — PVT</p>
+    </footer>
   </div>
 
   <script src="script.js"></script>
