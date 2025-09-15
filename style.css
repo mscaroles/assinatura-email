@@ -49,7 +49,7 @@ body{
   font-weight:700;
 }
 
-/* Formulário empilhado (um campo por linha) */
+/* Formulário: um campo por linha, “caixinhas” arredondadas */
 .form-stack{display:flex; flex-direction:column; gap:14px}
 .form-field{display:flex; flex-direction:column; gap:8px}
 
@@ -59,7 +59,6 @@ label{
 }
 .req{color:#e74c3c}
 
-/* Caixinha arredondada do input/select */
 .input-wrap{
   background:#fff;
   border:1px solid var(--stroke-strong);
@@ -110,7 +109,6 @@ label{
   transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
 }
 .btn:hover{transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
 .btn.outline{
   background:#fff; color:var(--brand);
   border:1px solid var(--brand);
@@ -118,10 +116,7 @@ label{
 .btn.primary{background:var(--brand)}
 
 /* Instruções */
-.instructions{
-  margin:0; padding-left:18px;
-  line-height:1.6; font-size:14px;
-}
+.instructions{margin:0; padding-left:18px; line-height:1.6; font-size:14px}
 
 /* Pré-visualização */
 .preview-box{
@@ -136,4 +131,9 @@ label{
 .preview-actions{display:flex; gap:12px; justify-content:flex-end; margin-top:16px}
 
 /* Responsivo */
-@media (max-width
+@media (max-width: 760px){
+  .container{padding:18px}
+  .btn{width:100%}
+  .form-actions{justify-content:stretch}
+  .preview-actions{justify-content:stretch; flex-direction:column}
+}
