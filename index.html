@@ -1,72 +1,128 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gerador de Assinatura PVT</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🔧 Configurar Assinatura</h1>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Gerador de Assinatura</h1>
+    </div>
+  </header>
 
-    <form id="assinatura-form">
-      <label for="nome">Nome: <span>*</span></label>
-      <input type="text" id="nome" placeholder="Nome Colaborador" required />
+  <main class="container">
+    <!-- Card: Formulário -->
+    <section class="card">
+      <h2 class="card-title">⚙️ Configurar Assinatura</h2>
 
-      <label for="funcao">Função: <span>*</span></label>
-      <select id="funcao" required>
-        <option value="">Selecione uma função</option>
-        <option value="Administrativo">Administrativo</option>
-        <option value="CEO">CEO</option>
-        <option value="Head de Serviços">Head de Serviços</option>
-        <option value="Head de Operações Administrativas">Head de Operações Administrativas</option>
-        <option value="Gestor de Portfólio de Projetos">Gestor de Portfólio de Projetos</option>
-        <option value="Coordenador de Projetos">Coordenador de Projetos</option>
-        <option value="PMO">PMO</option>
-        <option value="Consultor de Implantação">Consultor de Implantação</option>
-        <option value="Desenvolvedor">Desenvolvedor</option>
-        <option value="Consultor de Relacionamento com Cliente (CX)">Consultor de Relacionamento com Cliente (CX)</option>
-        <option value="Executivo de Contas">Executivo de Contas</option>
-        <option value="Gestor Administrativo">Gestor Administrativo</option>
-        <option value="Recursos e Alocações">Recursos e Alocações</option>
-        <option value="Analista de Faturamento">Analista de Faturamento</option>
-        <option value="Gente & Gestão">Gente & Gestão</option>
-      </select>
+      <form id="assinatura-form" class="form-stack">
+        <!-- Campo: Nome -->
+        <div class="form-field">
+          <label for="nome">Nome <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="nome" placeholder="Nome Colaborador" required />
+          </div>
+        </div>
 
-      <label for="email">Email: <span>*</span></label>
-      <input type="email" id="email" placeholder="colaborador@pvtsoftware.com.br" required />
+        <!-- Campo: Função -->
+        <div class="form-field">
+          <label for="funcao">Função <span class="req">*</span></label>
+          <div class="input-wrap">
+            <select id="funcao" required>
+              <option value="">Selecione uma função</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="CEO">CEO</option>
+              <option value="Head de Serviços">Head de Serviços</option>
+              <option value="Head de Operações Administrativas">Head de Operações Administrativas</option>
+              <option value="Gestor de Portfólio de Projetos">Gestor de Portfólio de Projetos</option>
+              <option value="Coordenador de Projetos">Coordenador de Projetos</option>
+              <option value="PMO">PMO</option>
+              <option value="Consultor de Implantação">Consultor de Implantação</option>
+              <option value="Desenvolvedor">Desenvolvedor</option>
+              <option value="Consultor de Relacionamento com Cliente (CX)">Consultor de Relacionamento com Cliente (CX)</option>
+              <option value="Executivo de Contas">Executivo de Contas</option>
+              <option value="Gestor Administrativo">Gestor Administrativo</option>
+              <option value="Recursos e Alocações">Recursos e Alocações</option>
+              <option value="Analista de Faturamento">Analista de Faturamento</option>
+              <option value="Gente & Gestão">Gente & Gestão</option>
+            </select>
+          </div>
+        </div>
 
-      <label for="celular">Celular: <span>*</span></label>
-      <input type="text" id="celular" placeholder="(27) 99999-9999" required />
+        <!-- Campo: Email -->
+        <div class="form-field">
+          <label for="email">Email <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input type="email" id="email" placeholder="colaborador@pvtsoftware.com.br" required />
+          </div>
+        </div>
 
-      <label for="fixo">Tel. Fixo:</label>
-      <input type="text" id="fixo" placeholder="(27) 3333-3333" />
+        <!-- Campo: Celular -->
+        <div class="form-field">
+          <label for="celular">Celular <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="celular" placeholder="(27) 99999-9999" required />
+          </div>
+        </div>
 
-      <button type="submit">Gerar Assinatura</button>
-    </form>
+        <!-- Campo: Fixo -->
+        <div class="form-field">
+          <label for="fixo">Tel. Fixo</label>
+          <div class="input-wrap">
+            <input type="text" id="fixo" placeholder="(27) 3333-3333" />
+          </div>
+        </div>
 
-    <div class="instrucoes">
-      <h2>⚠️ INSTRUÇÕES</h2>
-      <ol>
-        <li>Preencha o formulário acima com seus dados.</li>
-        <li>Clique em <strong>Gerar Assinatura</strong>.</li>
-        <li>Copie a imagem gerada na visualização abaixo.</li>
-        <li>Cole no campo de assinatura do seu e-mail (Gmail, Outlook, etc.).</li>
-        <li>Se quiser baixar, use os botões abaixo da pré-visualização.</li>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Gerar Assinatura</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Card: Instruções -->
+    <section class="card">
+      <h2 class="card-title">⚠️ Instruções</h2>
+      <ol class="instructions">
+        <li>Preencha os campos acima (cada um em sua caixinha).</li>
+        <li>Clique em <strong>Gerar Assinatura</strong> para ver a prévia.</li>
+        <li>Use <strong>Baixar Assinatura (PNG)</strong> para salvar a imagem, ou <strong>Download HTML</strong> para baixar o código.</li>
+        <li>Gmail: <em>Configurações → Ver todas → Assinatura</em> e cole a imagem no campo de assinatura.</li>
       </ol>
-    </div>
+    </section>
 
-    <div id="preview-container">
-      <h2>👀 Preview</h2>
-      <div id="assinatura-preview"></div>
-      <div class="botoes">
-        <button id="baixar-btn">📥 Baixar Assinatura (PNG)</button>
-        <button id="html-btn">💾 Download HTML</button>
+    <!-- Card: Preview & Botões -->
+    <section class="card">
+      <h2 class="card-title">👀 Pré-visualização</h2>
+      <div id="assinatura-preview" class="preview-box">
+        <p class="preview-placeholder">Gere sua assinatura para visualizar aqui.</p>
       </div>
-    </div>
-  </div>
+      <div class="preview-actions">
+        <button id="baixar-btn" class="btn">📥 Baixar Assinatura (PNG)</button>
+        <button id="html-btn" class="btn outline">💾 Download HTML</button>
+      </div>
+    </section>
+  </main>
 
+  <footer class="site-footer">
+    <div class="container">
+      <small>Feito com ❤️ — PVT</small>
+    </div>
+  </footer>
+
+  <!-- Bibliotecas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- JS do projeto -->
   <script src="script.js"></script>
 </body>
 </html>
