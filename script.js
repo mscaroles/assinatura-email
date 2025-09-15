@@ -1,3 +1,7 @@
+// Versão para depuração no console
+const assinaturaPVT_VERSION = '4';
+console.log('Assinatura PVT - JS version:', assinaturaPVT_VERSION);
+
 $(function () {
   // Máscaras
   $('#celular').mask('(00) 00000-0000');
@@ -25,49 +29,53 @@ $(function () {
       if (!email) $('#email').closest('.input-wrap').addClass('erro');
       if (!celular) $('#celular').closest('.input-wrap').addClass('erro');
 
-      // Mensagem de erro
       $('#assinatura-form').after('<p id="erro-msg" style="color:#e74c3c; font-weight:700; margin-top:8px;">⚠️ Preencha os campos obrigatórios</p>');
       return;
     }
 
-    // HTML da assinatura
+    // ====== HTML da assinatura (layout 3 colunas + selo maior + sociais à direita) ======
     const assinaturaHTML = `
-      <table style="font-family:'Nunito Sans',sans-serif; font-size:14px; color:#000000; border-collapse:collapse;">
+      <table style="font-family:'Nunito Sans',sans-serif; font-size:14px; color:#000000; border-collapse:collapse; width:100%; max-width:860px; table-layout:fixed;">
         <tr>
-          <!-- Logo -->
-          <td style="padding:0 16px 0 0; vertical-align:middle; text-align:center;">
+
+          <!-- COLUNA ESQUERDA: LOGO -->
+          <td style="width:200px; padding:0 16px 0 0; vertical-align:middle; text-align:center;">
             <img src="https://github.com/mscaroles/assinatura-email/blob/main/logopvt.jpeg?raw=true"
-                 alt="PVT" style="display:block; width:130px; height:auto;">
+                 alt="PVT" style="display:block; width:140px; height:auto; margin:0 auto;">
           </td>
 
-          <!-- Texto -->
-          <td style="vertical-align:middle; padding-right:16px; border-right:2px solid #ccc;">
-            <div style="font-size:18px; font-weight:700; color:#00b5ff; line-height:1.25;">${nome}</div>
-            <div style="font-size:16px; font-weight:700; color:#00b5ff; line-height:1.25;">${funcao}</div>
+          <!-- COLUNA CENTRAL: TEXTO -->
+          <td style="padding-right:16px; vertical-align:middle; border-right:2px solid #cfd6e0;">
+            <div style="font-size:18px; font-weight:700; color:#00b5ff; line-height:1.25; word-break:break-word;">${nome}</div>
+            <!-- função sem negrito -->
+            <div style="font-size:16px; font-weight:400; color:#00b5ff; line-height:1.25; word-break:break-word;">${funcao}</div>
 
-            <div style="margin-top:8px; line-height:1.4;">
+            <div style="margin-top:8px; line-height:1.5; word-break:break-word;">
               <a href="mailto:${email}" style="color:#000000; text-decoration:none;">${email}</a>
             </div>
-            <div style="line-height:1.4;">
+            <div style="line-height:1.5; word-break:break-word;">
               Cel: ${celular}${fixo ? ` &nbsp;|&nbsp; Fixo: ${fixo}` : ''}
             </div>
+          </td>
 
-            <!-- Social (texto puro com prefixo) -->
-            <div style="margin-top:10px; font-size:13px; line-height:1.6; color:#000000;">
-              <span style="display:block;">Site: <a href="https://pvtsoftware.com.br" target="_blank" style="color:#000000; text-decoration:none;">pvtsoftware.com.br</a></span>
-              <span style="display:block;">Instagram: <a href="https://instagram.com/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">@pvtsoftware</a></span>
-              <span style="display:block;">LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">/pvtsoftware</a></span>
+          <!-- COLUNA DIREITA: SELO + SOCIAIS -->
+          <td style="width:260px; padding-left:16px; vertical-align:middle; text-align:left;">
+            <!-- selo maior -->
+            <img src="https://github.com/mscaroles/assinatura-email/blob/main/selopvt.png?raw=true"
+                 alt="Selo PVT" style="display:block; height:74px; width:auto; margin-bottom:8px;">
+
+            <!-- sociais em texto, abaixo do selo -->
+            <div style="font-size:13px; line-height:1.5; color:#000000;">
+              <div>Site: <a href="https://pvtsoftware.com.br" target="_blank" style="color:#000000; text-decoration:none;">pvtsoftware.com.br</a></div>
+              <div>Instagram: <a href="https://instagram.com/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">@pvtsoftware</a></div>
+              <div>LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">/pvtsoftware</a></div>
             </div>
           </td>
 
-          <!-- Selo -->
-          <td style="padding-left:16px; vertical-align:middle; text-align:right;">
-            <img src="https://github.com/mscaroles/assinatura-email/blob/main/selopvt.png?raw=true"
-                 alt="Selo PVT" style="display:block; height:60px; width:auto;">
-          </td>
         </tr>
       </table>
     `;
+    // ====== /HTML assinatura ======
 
     // Renderiza preview
     $('#assinatura-preview').html(assinaturaHTML);
