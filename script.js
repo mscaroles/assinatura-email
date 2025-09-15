@@ -1,60 +1,70 @@
-document.getElementById("signatureForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+function generateSignature() {
+  const name = document.getElementById("name").value.trim();
+  const role = document.getElementById("role").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const cell = document.getElementById("cell").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
-  const nome = document.getElementById("nome").value;
-  const cargo = document.getElementById("cargo").value;
-  const telefone = document.getElementById("telefone").value;
-  const fixo = document.getElementById("fixo").value;
+  if (!name || !role || !email || !cell) {
+    document.getElementById("preview").innerHTML = "<p style='color:red;'>Preencha todos os campos obrigatórios.</p>";
+    return;
+  }
 
-  const assinaturaHTML = `
-    <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size:14px; color:#000;">
-      <tr>
-        <td style="padding-right:15px; vertical-align:top;">
-          <img src="https://i.imgur.com/0VgtJPU.png" alt="Logo PVT" style="height:60px;" />
-        </td>
-        <td style="border-left: 2px solid #0078d4; padding-left:15px; vertical-align:top;">
-          <strong style="font-size:16px;">${nome}</strong><br/>
-          ${cargo}<br/><br/>
-          <strong>Cel.:</strong> ${telefone}<br/>
-          ${fixo ? `<strong>Fixo:</strong> ${fixo}<br/>` : ""}
-          <br/>
-          <strong>Site:</strong> pvtsoftware.com.br<br/>
-          <strong>Instagram:</strong> @pvtsoftware<br/>
-          <strong>LinkedIn:</strong> /pvtsoftware<br/>
-        </td>
-        <td style="padding-left:15px;">
-          <img src="https://i.imgur.com/Z8u5xLk.png" alt="Selo" style="height:60px;" />
-        </td>
-      </tr>
-    </table>
+  const html = `
+  <table style="font-family:'Nunito Sans', sans-serif; font-size:14px; color:#000;">
+    <tr>
+      <td style="padding-right:20px;">
+        <img src="logopvt.jpeg" alt="Logo PVT" width="100">
+      </td>
+      <td style="border-left:1px solid #ccc; padding-left:20px;">
+        <strong style="color:#00b5ff; font-size:16px;">${name}</strong><br>
+        <span style="color:#00b5ff;">${role}</span><br><br>
+        <a href="mailto:${email}" style="color:black; text-decoration:underline;">${email}</a><br>
+        Cel: ${cell} ${phone ? `<br>Tel: ${phone}` : ""}
+      </td>
+      <td style="padding-left:20px; border-left:1px solid #ccc;">
+        <img src="selopvt.png" alt="Selo PVT" width="120"><br>
+        <div style="margin-top:8px;">
+          Site: <a href="https://pvtsoftware.com.br" target="_blank">pvtsoftware.com.br</a><br>
+          Instagram: <a href="https://instagram.com/pvtsoftware" target="_blank">@pvtsoftware</a><br>
+          LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" target="_blank">/pvtsoftware</a>
+        </div>
+      </td>
+    </tr>
+  </table>
   `;
 
-  const div = document.getElementById("assinatura");
-  div.innerHTML = assinaturaHTML;
-});
+  document.getElementById("preview").innerHTML = html;
+}
 
-document.getElementById("copiarAssinatura").addEventListener("click", function () {
+function copySignature() {
   const temp = document.createElement("textarea");
-  temp.value = document.getElementById("assinatura").innerHTML;
+  temp.value = document.getElementById("preview").innerHTML;
   document.body.appendChild(temp);
   temp.select();
   document.execCommand("copy");
   document.body.removeChild(temp);
-  alert("Assinatura copiada para a área de transferência!");
-});
+  alert("Assinatura copiada com sucesso!");
+}
 
-document.getElementById("baixarAssinatura").addEventListener("click", function () {
-  const blob = new Blob([document.getElementById("assinatura").innerHTML], { type: "text/html" });
+function downloadHTML() {
+  const content = document.getElementById("preview").innerHTML;
+  const blob = new Blob([content], { type: "text/html" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "assinatura.html";
   link.click();
-});
+}
 
-document.getElementById("baixarHTML").addEventListener("click", function () {
-  const blob = new Blob([document.getElementById("assinatura").innerHTML], { type: "text/html" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "assinatura.html";
-  link.click();
+function downloadImage() {
+  html2canvas(document.querySelector("#preview")).then(canvas => {
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "assinatura.png";
+    link.click();
+  });
+}
+
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("input", generateSignature);
 });
