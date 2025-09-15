@@ -1,26 +1,38 @@
-// script.js
-function gerarAssinatura() {
-  const nome = document.getElementById("nome").value;
-  const cargo = document.getElementById("cargo").value;
-  const email = document.getElementById("email").value;
-
-  const assinatura = `
-    <table style="font-family:Arial,sans-serif;font-size:14px;">
-      <tr><td><strong>${nome}</strong></td></tr>
-      <tr><td>${cargo}</td></tr>
-      <tr><td>Email: <a href="mailto:${email}">${email}</a></td></tr>
-    </table>
-  `;
-
-  document.getElementById("resultado").innerHTML = assinatura;
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #f5f5f5;
+  padding: 40px;
+  color: #000000;
 }
 
-function copiar() {
-  const temp = document.createElement("textarea");
-  temp.value = document.getElementById("resultado").innerHTML;
-  document.body.appendChild(temp);
-  temp.select();
-  document.execCommand("copy");
-  document.body.removeChild(temp);
-  alert("Assinatura copiada!");
+h1, h2 {
+  color: #00b5ff;
+  font-weight: 700;
+}
+
+form input {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px;
+  width: 300px;
+  font-size: 14px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #00b5ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#resultado {
+  margin-top: 20px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  max-width: 600px;
 }
