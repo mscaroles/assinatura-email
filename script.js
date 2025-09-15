@@ -43,3 +43,41 @@ function gerarAssinatura() {
 
   document.getElementById('preview').innerHTML = assinatura;
 }
+
+function copiarAssinatura() {
+  gerarAssinatura();
+  const temp = document.createElement('textarea');
+  temp.value = document.getElementById('preview').innerHTML;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand('copy');
+  document.body.removeChild(temp);
+  alert('Assinatura copiada para a área de transferência.');
+}
+
+function baixarHTML() {
+  gerarAssinatura();
+  const blob = new Blob([document.getElementById('preview').innerHTML], { type: 'text/html' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'assinatura.html';
+  link.click();
+}
+
+function baixarPNG() {
+  gerarAssinatura();
+  const preview = document.getElementById('preview');
+  html2canvas(preview).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'assinatura.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+// Garante que a função seja chamada sempre que os campos forem preenchidos
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input, select').forEach(field => {
+    field.addEventListener('input', gerarAssinatura);
+  });
+});
