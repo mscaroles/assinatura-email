@@ -1,124 +1,72 @@
-// Versão p/ depuração (Console)
-const assinaturaPVT_VERSION = '7';
-console.log('Assinatura PVT - JS version:', assinaturaPVT_VERSION);
+document.getElementById("signatureForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-$(function () {
-  // Máscaras
-  $('#celular').mask('(00) 00000-0000');
-  $('#fixo').mask('(00) 0000-0000');
+  const nome = document.getElementById("nome").value;
+  const cargo = document.getElementById("cargo").value;
+  const telefone = document.getElementById("telefone").value;
+  const celular = document.getElementById("celular").value;
+  const email = document.getElementById("email").value;
+  const estado = document.getElementById("estado").value;
+  const cidade = document.getElementById("cidade").value;
 
-  // Gerar prévia
-  $('#assinatura-form').on('submit', function (e) {
-    e.preventDefault();
+  const assinatura = `
+  <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif;">
+    <tr>
+      <td>
+        <strong style="font-size: 16px; color: #00b5ff;">${nome}</strong><br />
+        <span style="font-size: 14px;">${cargo}</span><br /><br />
+        <span style="font-size: 14px;">📞 ${telefone ? telefone + " | " : ""}${celular}</span><br />
+        <span style="font-size: 14px;">📧 ${email}</span><br />
+        <span style="font-size: 14px;">📍 ${cidade} - ${estado}</span>
+      </td>
+      <td style="padding: 0 20px;">|</td>
+      <td align="center">
+        <img src="https://i.imgur.com/TPlbR1E.png" alt="Logo PVT" width="100"><br /><br />
+        <img src="https://i.imgur.com/qE1vT7a.png" alt="Selo" width="90"/><br />
+        <span style="font-size: 13px;">
+          Site: pvtsoftware.com.br<br />
+          Instagram: @pvtsoftware<br />
+          LinkedIn: /pvtsoftware
+        </span>
+      </td>
+    </tr>
+  </table>`;
 
-    const nome = $('#nome').val().trim();
-    const funcao = $('#funcao').val().trim();
-    const email = $('#email').val().trim();
-    const celular = $('#celular').val().trim();
-    const fixo = $('#fixo').val().trim();
-
-    if (!nome || !funcao || !email || !celular) {
-      alert('⚠️ Preencha os campos obrigatórios');
-      return;
-    }
-
-    // Assinatura: tabela 3 colunas (logo | texto | selo+sociais)
-    const assinaturaHTML = `
-      <table style="font-family:'Nunito Sans',sans-serif; font-size:14px; color:#000000; border-collapse:collapse; width:100%; max-width:860px; table-layout:fixed;">
-        <tr>
-
-          <!-- ESQUERDA: LOGO -->
-          <td style="width:200px; padding:0 16px 0 0; vertical-align:middle; text-align:center;">
-            <img src="https://github.com/noamarketing/assinatura-email/blob/main/logopvt.jpeg?raw=true"
-                 alt="PVT" style="display:block; width:140px; height:auto; margin:0 auto;">
-          </td>
-
-          <!-- CENTRO: TEXTO -->
-          <td style="padding:0 24px 0 0; vertical-align:middle; border-right:2px solid #cfd6e0; width:360px;">
-            <div style="font-size:18px; font-weight:700; color:#00b5ff; line-height:1.25; word-break:break-word;">${nome}</div>
-            <div style="font-size:16px; font-weight:400; color:#00b5ff; line-height:1.25; word-break:break-word;">${funcao}</div>
-
-            <div style="margin-top:8px; line-height:1.5; word-break:break-word;">
-              <a href="mailto:${email}" style="color:#000000; text-decoration:none;">${email}</a>
-            </div>
-            <div style="line-height:1.5; word-break:break-word;">
-              Cel: ${celular}${fixo ? ` &nbsp;|&nbsp; Fixo: ${fixo}` : ''}
-            </div>
-          </td>
-
-          <!-- DIREITA: SELO + SOCIAIS (abaixo do selo) -->
-          <td style="width:240px; padding-left:20px; vertical-align:middle; text-align:left;">
-            <img src="https://github.com/noamarketing/assinatura-email/blob/main/selopvt.png?raw=true"
-                 alt="Selo PVT" style="display:block; height:74px; width:auto; margin-bottom:10px;">
-            <div style="font-size:13px; line-height:1.5; color:#000000;">
-              <div>Site: <a href="https://pvtsoftware.com.br" target="_blank" style="color:#000000; text-decoration:none;">pvtsoftware.com.br</a></div>
-              <div>Instagram: <a href="https://instagram.com/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">@pvtsoftware</a></div>
-              <div>LinkedIn: <a href="https://linkedin.com/company/pvtsoftware" target="_blank" style="color:#000000; text-decoration:none;">/pvtsoftware</a></div>
-            </div>
-          </td>
-
-        </tr>
-      </table>
-    `;
-
-    $('#assinatura-preview').html(assinaturaHTML);
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  });
-
-  // Copiar assinatura (HTML rico)
-  $('#copiar-btn').on('click', async function () {
-    const html = $('#assinatura-preview').html();
-    if (!html || !html.trim()) { alert('Gere a assinatura primeiro.'); return; }
-
-    try {
-      if (navigator.clipboard && window.ClipboardItem) {
-        const blob = new Blob([html], { type: 'text/html' });
-        const item = new ClipboardItem({ 'text/html': blob });
-        await navigator.clipboard.write([item]);
-        alert('Assinatura copiada! Agora cole no campo de assinatura do Outlook.');
-        return;
-      }
-    } catch (e) { }
-
-    // Fallback
-    const range = document.createRange();
-    const node = document.getElementById('assinatura-preview');
-    range.selectNodeContents(node);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    try {
-      document.execCommand('copy');
-      sel.removeAllRanges();
-      alert('Assinatura copiada! Agora cole no campo de assinatura do Outlook.');
-    } catch (err) {
-      sel.removeAllRanges();
-      alert('Não foi possível copiar automaticamente. Selecione e copie a assinatura manualmente.');
-    }
-  });
-
-  // Download HTML
-  $('#html-btn').on('click', function () {
-    const html = $('#assinatura-preview').html();
-    if (!html || !html.trim()) { alert('Gere a assinatura primeiro.'); return; }
-
-    const blob = new Blob([html], { type: 'text/html' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'assinatura-pvt.html';
-    a.click();
-  });
-
-  // Download PNG
-  $('#baixar-btn').on('click', function () {
-    const el = document.querySelector('#assinatura-preview');
-    if (!el || !el.innerHTML.trim()) { alert('Gere a assinatura primeiro.'); return; }
-
-    html2canvas(el, { backgroundColor: null, scale: 2 }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = 'assinatura-pvt.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    });
-  });
+  const preview = document.getElementById("assinaturaPreview");
+  preview.innerHTML = assinatura;
 });
+
+function copiarAssinatura() {
+  const preview = document.getElementById("assinaturaPreview");
+  const range = document.createRange();
+  range.selectNode(preview);
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  try {
+    document.execCommand("copy");
+    alert("Assinatura copiada com sucesso!");
+  } catch (err) {
+    alert("Erro ao copiar a assinatura.");
+  }
+  window.getSelection().removeAllRanges();
+}
+
+function baixarAssinatura() {
+  const node = document.getElementById("assinaturaPreview");
+  html2canvas(node).then((canvas) => {
+    const link = document.createElement("a");
+    link.download = "assinatura.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+function baixarHTML() {
+  const assinatura = document.getElementById("assinaturaPreview").innerHTML;
+  const blob = new Blob([assinatura], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.download = "assinatura.html";
+  link.href = url;
+  link.click();
+}
