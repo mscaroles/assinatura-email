@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
   <header class="site-header">
@@ -87,23 +87,22 @@
       <h2 class="card-title">⚠️ Instruções</h2>
       <ol class="instructions">
         <li>Preencha os campos acima.</li>
-        <li>Clique em <strong>Gerar Assinatura</strong> para visualizar a prévia.</li>
-        <li>Para usar a assinatura:
+        <li>Clique em <strong>Gerar Assinatura</strong>.</li>
+        <li>Selecione <strong>Copie sua assinatura</strong> e cole no Outlook:
           <ul class="substeps">
-            <li><strong>Outlook Desktop</strong> → <em>Arquivo → Opções → Email → Assinaturas…</em> → crie/edite a assinatura e <strong>cole</strong> a assinatura gerada na área de edição. Compatível com Desktop (Windows/Mac).</li>
-            <li><strong>Outlook Web</strong> → <em>Configurações (⚙) → Email → Redigir e responder → Assinatura</em> → cole a assinatura na área de edição.</li>
-            <li><strong>Outlook Mobile</strong> → <em>Configurações → Assinatura</em> → cole o conteúdo (algumas versões simplificam a formatação, mas a estrutura permanece).</li>
-            <li><strong>Gmail</strong> → <em>Configurações (⚙) → Ver todas as configurações → Geral → Assinatura</em> → crie/edite e <strong>cole</strong> a assinatura gerada na área de edição. Se preferir usar imagem: clique no ícone de imagem e faça <em>Upload</em> do PNG baixado.</li>
+            <li><strong>Outlook Desktop</strong>: <em>Arquivo → Opções → Email → Assinaturas…</em></li>
+            <li><strong>Outlook Web</strong>: <em>Configurações → Email → Redigir e responder</em></li>
+            <li><strong>Outlook Mobile</strong>: <em>Configurações → Assinatura</em></li>
           </ul>
         </li>
-        <li>Se quiser salvar, use os botões abaixo da pré-visualização:
+        <li>Se preferir:
           <ul class="substeps">
-            <li><strong>📥 Baixar Assinatura (PNG)</strong> → salva a assinatura como imagem para colar ou enviar.</li>
-            <li><strong>💾 Download HTML</strong> → gera o código para uso pela equipe de TI ou em outros clientes de e-mail.</li>
+            <li>Baixe como <strong>PNG</strong> e faça upload da imagem.</li>
+            <li>Ou use <strong>Download HTML</strong> para inserir com apoio do time de TI.</li>
           </ul>
         </li>
       </ol>
-      <p><em>Caso surgirem dúvidas, entre em contato com o time de Gestão para mais informações.</em></p>
+      <p><em>Caso surjam dúvidas, entre em contato com o time de Gestão para mais informações.</em></p>
       <p class="compat">✅ Assinatura compatível com <strong>Outlook (Desktop, Web e Mobile)</strong> e <strong>Gmail</strong>.</p>
     </section>
 
@@ -114,6 +113,7 @@
         <p class="preview-placeholder">Gere sua assinatura para visualizar aqui.</p>
       </div>
       <div class="preview-actions">
+        <button id="copiar-btn" class="btn outline">📋 Copie sua assinatura</button>
         <button id="baixar-btn" class="btn">📥 Baixar Assinatura (PNG)</button>
         <button id="html-btn" class="btn outline">💾 Download HTML</button>
       </div>
@@ -132,6 +132,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <!-- JS do projeto -->
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
