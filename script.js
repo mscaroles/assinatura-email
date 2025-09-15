@@ -1,5 +1,5 @@
 // Versão p/ depuração (Console)
-const assinaturaPVT_VERSION = '6';
+const assinaturaPVT_VERSION = '7';
 console.log('Assinatura PVT - JS version:', assinaturaPVT_VERSION);
 
 $(function () {
@@ -34,7 +34,7 @@ $(function () {
           </td>
 
           <!-- CENTRO: TEXTO -->
-          <td style="padding-right:16px; vertical-align:middle; border-right:2px solid #cfd6e0;">
+          <td style="padding:0 24px 0 0; vertical-align:middle; border-right:2px solid #cfd6e0; width:360px;">
             <div style="font-size:18px; font-weight:700; color:#00b5ff; line-height:1.25; word-break:break-word;">${nome}</div>
             <div style="font-size:16px; font-weight:400; color:#00b5ff; line-height:1.25; word-break:break-word;">${funcao}</div>
 
@@ -47,7 +47,7 @@ $(function () {
           </td>
 
           <!-- DIREITA: SELO + SOCIAIS (abaixo do selo) -->
-          <td style="width:260px; padding-left:16px; vertical-align:middle; text-align:left;">
+          <td style="width:240px; padding-left:20px; vertical-align:middle; text-align:left;">
             <img src="https://github.com/noamarketing/assinatura-email/blob/main/selopvt.png?raw=true"
                  alt="Selo PVT" style="display:block; height:74px; width:auto; margin-bottom:10px;">
             <div style="font-size:13px; line-height:1.5; color:#000000;">
@@ -70,7 +70,6 @@ $(function () {
     const html = $('#assinatura-preview').html();
     if (!html || !html.trim()) { alert('Gere a assinatura primeiro.'); return; }
 
-    // Tenta Clipboard API (HTML)
     try {
       if (navigator.clipboard && window.ClipboardItem) {
         const blob = new Blob([html], { type: 'text/html' });
@@ -79,11 +78,9 @@ $(function () {
         alert('Assinatura copiada! Agora cole no campo de assinatura do Outlook.');
         return;
       }
-    } catch (e) {
-      // segue pro fallback
-    }
+    } catch (e) { }
 
-    // Fallback: seleciona DOM e usa execCommand
+    // Fallback
     const range = document.createRange();
     const node = document.getElementById('assinatura-preview');
     range.selectNodeContents(node);
@@ -112,7 +109,7 @@ $(function () {
     a.click();
   });
 
-  // Download PNG do preview
+  // Download PNG
   $('#baixar-btn').on('click', function () {
     const el = document.querySelector('#assinatura-preview');
     if (!el || !el.innerHTML.trim()) { alert('Gere a assinatura primeiro.'); return; }
