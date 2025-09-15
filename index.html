@@ -2,26 +2,33 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Gerador de Assinatura - PVT</title>
+  <title>Configurar Assinatura PVT</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <style>
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 40px;
+      color: #000000;
+    }
 
-  <h1>Gerador de Assinatura</h1>
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-  <form id="form">
-    <input type="text" id="nome" placeholder="Nome" required>
-    <input type="text" id="cargo" placeholder="Cargo" required>
-    <input type="email" id="email" placeholder="E-mail" required>
-    <button type="button" onclick="gerarAssinatura()">Gerar Assinatura</button>
-  </form>
+    h2 {
+      color: #00b5ff;
+      font-size: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  <h2>Pré-visualização</h2>
-  <div id="resultado"></div>
-
-  <button onclick="copiar()">Copiar Assinatura</button>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    label {
