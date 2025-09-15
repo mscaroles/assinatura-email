@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
   <header class="site-header">
@@ -27,7 +27,7 @@
         <div class="form-field">
           <label for="nome">Nome <span class="req">*</span></label>
           <div class="input-wrap">
-            <input type="text" id="nome" placeholder="Nome Colaborador" required />
+            <input type="text" id="nome" placeholder="Nome Completo" required />
           </div>
         </div>
 
@@ -58,14 +58,14 @@
         <div class="form-field">
           <label for="email">Email <span class="req">*</span></label>
           <div class="input-wrap">
-            <input type="email" id="email" placeholder="colaborador@pvtsoftware.com.br" required />
+            <input type="email" id="email" placeholder="nome.sobrenome@pvtsoftware.com.br" required />
           </div>
         </div>
 
         <div class="form-field">
           <label for="celular">Celular <span class="req">*</span></label>
           <div class="input-wrap">
-            <input type="text" id="celular" placeholder="(27) 99999-9999" required />
+            <input type="text" id="celular" placeholder="(11) 99999-9999" required />
           </div>
         </div>
 
@@ -86,23 +86,25 @@
     <section class="card">
       <h2 class="card-title">⚠️ Instruções</h2>
       <ol class="instructions">
-        <li>Preencha todos os campos acima com seus dados.</li>
+        <li>Preencha os campos acima.</li>
         <li>Clique em <strong>Gerar Assinatura</strong> para visualizar a prévia.</li>
-        <li>Se quiser salvar, use:
-          <ul>
-            <li><strong>📥 Baixar Assinatura (PNG)</strong> → gera uma imagem para inserir no Outlook.</li>
-            <li><strong>💾 Download HTML</strong> → gera o código caso precise enviar para TI ou usar em outro cliente de e-mail.</li>
+        <li>Para usar a assinatura:
+          <ul class="substeps">
+            <li><strong>Outlook Desktop</strong> → <em>Arquivo → Opções → Email → Assinaturas…</em> → crie/edite a assinatura e <strong>cole</strong> a assinatura gerada na área de edição. Compatível com Desktop (Windows/Mac).</li>
+            <li><strong>Outlook Web</strong> → <em>Configurações (⚙) → Email → Redigir e responder → Assinatura</em> → cole a assinatura na área de edição.</li>
+            <li><strong>Outlook Mobile</strong> → <em>Configurações → Assinatura</em> → cole o conteúdo (algumas versões simplificam a formatação, mas a estrutura permanece).</li>
+            <li><strong>Gmail</strong> → <em>Configurações (⚙) → Ver todas as configurações → Geral → Assinatura</em> → crie/edite e <strong>cole</strong> a assinatura gerada na área de edição. Se preferir usar imagem: clique no ícone de imagem e faça <em>Upload</em> do PNG baixado.</li>
           </ul>
         </li>
-        <li>Para configurar no <strong>Outlook</strong>:
-          <ul>
-            <li>Abra o Outlook.</li>
-            <li>Acesse: <em>Arquivo → Opções → Email → Assinaturas…</em></li>
-            <li>Crie uma nova assinatura e cole a imagem gerada na área de edição.</li>
-            <li>Salve e defina como padrão (se desejar).</li>
+        <li>Se quiser salvar, use os botões abaixo da pré-visualização:
+          <ul class="substeps">
+            <li><strong>📥 Baixar Assinatura (PNG)</strong> → salva a assinatura como imagem para colar ou enviar.</li>
+            <li><strong>💾 Download HTML</strong> → gera o código para uso pela equipe de TI ou em outros clientes de e-mail.</li>
           </ul>
         </li>
       </ol>
+      <p><em>Caso surgirem dúvidas, entre em contato com o time de Gestão para mais informações.</em></p>
+      <p class="compat">✅ Assinatura compatível com <strong>Outlook (Desktop, Web e Mobile)</strong> e <strong>Gmail</strong>.</p>
     </section>
 
     <!-- Card: Preview & Botões -->
@@ -120,16 +122,16 @@
 
   <footer class="site-footer">
     <div class="container">
-      <small>Feito com ❤️ — PVT</small>
+      <small>Feito com 🩵 — PVT</small>
     </div>
   </footer>
 
-  <!-- Bibliotecas -->
+  <!-- Bibliotecas (na ordem correta) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <!-- JS do projeto -->
-  <script src="script.js"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
