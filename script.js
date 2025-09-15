@@ -1,5 +1,5 @@
-// Versão para depuração no console
-const assinaturaPVT_VERSION = '4';
+// Versão (ajuda a confirmar se o cache foi quebrado)
+const assinaturaPVT_VERSION = '5';
 console.log('Assinatura PVT - JS version:', assinaturaPVT_VERSION);
 
 $(function () {
@@ -18,29 +18,22 @@ $(function () {
     const celular = $('#celular').val().trim();
     const fixo = $('#fixo').val().trim();
 
-    // Reset erros visuais
-    $('.input-wrap').removeClass('erro');
-    $('#erro-msg').remove();
-
-    // Verifica obrigatórios
+    // Verifica obrigatórios (HTML5 também bloqueia, isto é só por UX)
     if (!nome || !funcao || !email || !celular) {
-      if (!nome) $('#nome').closest('.input-wrap').addClass('erro');
-      if (!funcao) $('#funcao').closest('.input-wrap').addClass('erro');
-      if (!email) $('#email').closest('.input-wrap').addClass('erro');
-      if (!celular) $('#celular').closest('.input-wrap').addClass('erro');
-
-      $('#assinatura-form').after('<p id="erro-msg" style="color:#e74c3c; font-weight:700; margin-top:8px;">⚠️ Preencha os campos obrigatórios</p>');
+      alert('⚠️ Preencha os campos obrigatórios');
       return;
     }
 
-    // ====== HTML da assinatura (layout 3 colunas + selo maior + sociais à direita) ======
+    // ====== HTML da assinatura ======
+    // Layout 3 colunas: logo (esq), texto (centro), selo + sociais (dir)
+    // Largura controlada e divisória central equilibrada
     const assinaturaHTML = `
       <table style="font-family:'Nunito Sans',sans-serif; font-size:14px; color:#000000; border-collapse:collapse; width:100%; max-width:860px; table-layout:fixed;">
         <tr>
 
           <!-- COLUNA ESQUERDA: LOGO -->
           <td style="width:200px; padding:0 16px 0 0; vertical-align:middle; text-align:center;">
-            <img src="https://github.com/mscaroles/assinatura-email/blob/main/logopvt.jpeg?raw=true"
+            <img src="https://github.com/noamarketing/assinatura-email/blob/main/logopvt.jpeg?raw=true"
                  alt="PVT" style="display:block; width:140px; height:auto; margin:0 auto;">
           </td>
 
@@ -61,8 +54,8 @@ $(function () {
           <!-- COLUNA DIREITA: SELO + SOCIAIS -->
           <td style="width:260px; padding-left:16px; vertical-align:middle; text-align:left;">
             <!-- selo maior -->
-            <img src="https://github.com/mscaroles/assinatura-email/blob/main/selopvt.png?raw=true"
-                 alt="Selo PVT" style="display:block; height:74px; width:auto; margin-bottom:8px;">
+            <img src="https://github.com/noamarketing/assinatura-email/blob/main/selopvt.png?raw=true"
+                 alt="Selo PVT" style="display:block; height:74px; width:auto; margin-bottom:10px;">
 
             <!-- sociais em texto, abaixo do selo -->
             <div style="font-size:13px; line-height:1.5; color:#000000;">
